@@ -1,0 +1,21 @@
+{
+  "name": "fullstackvueexpress",
+  "version": "1.0.0",
+  "description": "Full stack vue and express app",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongodb": "^3.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  },
+  "author": "Albert Attakora Frimpong",
+  "license": "MIT"
+}
