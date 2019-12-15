@@ -9,8 +9,26 @@ router.get('/', async (req, res) => {
     res.send(await posts.find({}).toArray());
 });
 
+// Add Post
+router.post('/', async (req, res) => {
+    const posts = await loadPostsCollection();
+    await posts.insertOne({
+        name: req.body.name,
+        text: req.body.text,
+        createdAt: new Date()
+    });
+    res.status(201).send();
+});
 
-// Connecting to database
+// Delete Post
+router.delete('/:id', async (req, res) => {
+    const posts = await loadPostsCollection();
+    await posts.deleteOne({_id: new mongodb.ObjectID(req.params.id)});
+    res.status(200).send();
+});
+
+
+// Connecting to mongodb Atlas
 async function loadPostsCollection() {
     const client = await mongodb.MongoClient.connect(
         'mongodb+srv://Albert:1234@cluster0-rprnm.mongodb.net/test?retryWrites=true&w=majority', {
@@ -20,6 +38,5 @@ async function loadPostsCollection() {
     );
     return client.db('vue_express').collection('posts')
 }
-
 
 module.exports = router;
